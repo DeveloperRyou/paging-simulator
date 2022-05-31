@@ -10,19 +10,25 @@ void operate(t_data *data, int operate_id, int pid, int page)
 	}
 	// access page
 	else if (operate_id == 1){
+		int flag = 1;
 		// check pagefault
 		if (is_pagefault(data->phys, pid, page, data->max_frames)){
 			data->page_fault++;
 			// physical memory allocate with buddy system
 			while (physical_allocate(data, pid, page)){
 				// cannot allocate then remove victim
+				if (data->que->len == 0){
+					// cannot allocate (over size)
+					flag = 0;
+					break;
+				}
 				queue_pop(data);
 				// reset(find) victim
 				data->victim(data, -1, -1);
 			}
-			queue_push(data, pid, page);
+			if (flag) queue_push(data, pid, page);
 		}
-		data->victim(data, pid, page);
+		if (flag) data->victim(data, pid, page);
 	}
 	// virtual memory free
 	else if (operate_id == 2){

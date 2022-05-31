@@ -8,19 +8,19 @@ int parse_option(char *str)
 			return 0;
 	str += 6;
 	// parse option
-	if (strcmp(str, "fifo"))
+	if (strcmp(str, "fifo") == 0)
 		return 1;
-	else if (strcmp(str, "stack"))
+	else if (strcmp(str, "stack") == 0)
 		return 2;
-	else if (strcmp(str, "sampled"))
+	else if (strcmp(str, "sampled") == 0)
 		return 3;
-	else if (strcmp(str, "second-chance"))
+	else if (strcmp(str, "second-chance") == 0)
 		return 4;
-	else if (strcmp(str, "lfu"))
+	else if (strcmp(str, "lfu") == 0)
 		return 5;
-	else if (strcmp(str, "mfu"))
+	else if (strcmp(str, "mfu") == 0)
 		return 6;
-	else if (strcmp(str, "optimal"))
+	else if (strcmp(str, "optimal") == 0)
 		return 7;
 	return 0;
 }

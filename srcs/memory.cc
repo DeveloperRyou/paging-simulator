@@ -45,23 +45,28 @@ int physical_allocate(t_data *data, int pid, int aid)
 	int st_idx = 0;
 	int ed_idx = 0;
 	// find smallest empty place
-	while (st_idx - ed_idx < pages && ed_idx < data->max_frames){
-		if ((ed_idx - st_idx) % pages == 0 && st_idx != ed_idx)
+	while (ed_idx < data->max_frames){
+		if (st_idx != ed_idx && (ed_idx - st_idx) % pages == 0)
 			len++;
-		if (data->phys->memory[ed].aid != -1){
-			if (len != 0){
-				if (len < mn_len){
-					mn_len = len;
-					st = st_idx;
-					ed = st + pages;
-				}
-				len = 0;
+		if (data->phys->memory[ed_idx].aid != -1){
+			if (0 < len && len < mn_len){
+				mn_len = len;
+				st = st_idx;
+				ed = st + pages;
 			}
-			st_idx += pages;
-			ed_idx = st;
+			st_idx += pages * (0 < len ? len : 1);
+			ed_idx = st_idx;
+			len = 0;
 		}
 		else
 			ed_idx++;
+	}
+	if (st_idx != ed_idx && (ed_idx - st_idx) % pages == 0)
+		len++;
+	if (len != 0 && len < mn_len){
+		mn_len = len;
+		st = st_idx;
+		ed = st + pages;
 	}
 	// allocate success
 	if (ed - st == pages){
