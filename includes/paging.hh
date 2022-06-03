@@ -47,7 +47,6 @@ typedef struct s_queue
 {
 	t_queue_unit *array;
 	int len;
-	int timeinterval;
 } t_queue;
 
 typedef struct s_operate
@@ -65,6 +64,7 @@ typedef struct s_data {
 	int max_pages;
 	int max_frames;
 	int page_fault;
+	int option;
 	void (*victim)(struct s_data *data, int pid, int aid);
 	t_queue *que;
 	int max_operate;
@@ -102,6 +102,7 @@ void queue_delete(t_data *data, int pid, int aid);
 // victim.cc
 void victim_fifo(t_data *data, int pid, int aid);
 void victim_stack(t_data *data, int pid, int aid);
+void vitcim_sampled_update(t_data *data);
 void victim_sampled(t_data *data, int pid, int aid);
 void victim_secondchance(t_data *data, int pid, int aid);
 void victim_lfu(t_data *data, int pid, int aid);

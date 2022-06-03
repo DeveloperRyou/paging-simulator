@@ -7,8 +7,7 @@ void queue_pop(t_data *data)
 	for (int i=0;i<data->que->len;i++)
 		data->que->array[i] = data->que->array[i+1];
 	data->que->len--;
-	//debug : 
-	printf("%d, %d poped\n", victim.pid, victim.aid);
+	//debug : 	printf("%d, %d poped\n", victim.pid, victim.aid);
 	physical_free(data, victim.pid, victim.aid);
 }
 
@@ -17,8 +16,7 @@ void queue_push(t_data *data, int pid, int aid)
 	// push end of que
 	data->que->array[data->que->len].pid = pid;
 	data->que->array[data->que->len].aid = aid;
-	//debug : 
-	printf("idx : %d : %d, %d pushed\n", data->que->len, pid, aid);
+	//debug : 	printf("idx : %d : %d, %d pushed\n", data->que->len, pid, aid);
 	data->que->len++;
 }
 

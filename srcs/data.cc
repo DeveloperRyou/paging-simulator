@@ -31,11 +31,10 @@ t_data *make_data(int num_process, int N, int M, int num_operate, int option)
 		data->que->array[i].aid = -1;
 		data->que->array[i].pid = -1;
 		data->que->array[i].refbit = 0;
-		data->que->array[i].refbyte = 255;
+		data->que->array[i].refbyte = 0;
 		data->que->array[i].used = 0;
 	}
 	data->que->len = 0;
-	data->que->timeinterval = 0;
 	// operate
 	data->operate = new t_operate[num_operate];
 	for (int i=0;i<num_operate;i++){
@@ -65,6 +64,7 @@ t_data *make_data(int num_process, int N, int M, int num_operate, int option)
 		data->victim = &victim_mfu;
 	else if (option == 7)
 		data->victim = &victim_optimal;
+	data->option = option;
 	return data;
 }
 
