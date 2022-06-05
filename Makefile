@@ -38,7 +38,7 @@ test : all
 
 test-make :
 	$(GCC) ./tests/testmaker.cc -o ./tests/testmaker
-	./tests/testmaker.exe > ./tests/test1
+	./tests/testmaker > ./tests/test1
 
 test-clean : 
 	$(RM) ./tests/test*_*
