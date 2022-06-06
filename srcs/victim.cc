@@ -140,7 +140,7 @@ void victim_optimal(t_data *data, int pid, int aid)
 	if (pid != -1 && aid != -1)
 		return;
 	int idx = 0;
-	for (int i=data->current_operate+1;i<data->max_operate;i++){
+	for (int i=data->max_operate-1;i>data->current_operate;i--){
 		if (data->operate[i].operate_id == 1){
 			pid = data->operate[i].pid;
 			aid = data->operate[i].page;
