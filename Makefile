@@ -32,13 +32,3 @@ re : clean all
 clean : 
 	$(RM) $(OBJS)
 	$(RM) $(NAME)
-
-test : all
-	bash ./tests/test.sh
-
-test-make :
-	$(GCC) ./tests/testmaker.cc -o ./tests/testmaker
-	./tests/testmaker > ./tests/test1
-
-test-clean : 
-	$(RM) ./tests/test*_*
